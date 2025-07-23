@@ -11,6 +11,7 @@ The system uses Object-Oriented Programming principles like:
 - Validation logic
 - Retry mechanism (with simulated failure)
 - CLI-based user input
+- Lombok for Logging
 
 ## Features
 
@@ -28,7 +29,7 @@ The system uses Object-Oriented Programming principles like:
 - IntelliJ IDEA
 - Java Collections
 - Random failure simulation
-- SLF4J (Lombok `@Slf4j` can be used for logging if enabled)(on it currently, not implemented Yet)
+- SLF4J (Lombok `@Slf4j` can be used for logging )
 
 ##  How to Run
 
