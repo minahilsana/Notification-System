@@ -35,7 +35,7 @@ The system uses Object-Oriented Programming principles like:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/notification-system.git
+   git clone https://github.com/minahilsana/notification-system.git
 
 2. Open the project in IntelliJ IDEA.
 
