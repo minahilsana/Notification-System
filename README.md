@@ -1,9 +1,9 @@
 # Notification System Assignment
 
 This is a simple Java-based notification system that supports sending messages via:
-- 📧 Email
-- 📱 SMS
-- 🔔 Push Notifications
+-  Email
+-  SMS
+-  Push Notifications
 
 The system uses Object-Oriented Programming principles like:
 - Interfaces
@@ -12,7 +12,7 @@ The system uses Object-Oriented Programming principles like:
 - Retry mechanism (with simulated failure)
 - CLI-based user input
 
-## 💡 Features
+## Features
 
 - Validates message input (e.g., subject for email, phone number for SMS)
 - Simulates random failures (70% success rate per message)
@@ -22,7 +22,7 @@ The system uses Object-Oriented Programming principles like:
     - Choose notification type
     - Re-run or exit after each run
 
-## 🛠️ Technologies
+## Technologies
 
 - Java 17+
 - IntelliJ IDEA
@@ -30,7 +30,7 @@ The system uses Object-Oriented Programming principles like:
 - Random failure simulation
 - SLF4J (Lombok `@Slf4j` can be used for logging if enabled)(on it currently, not implemented Yet)
 
-## ▶️ How to Run
+##  How to Run
 
 1. Clone the repository:
    ```bash

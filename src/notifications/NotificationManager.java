@@ -1,10 +1,15 @@
 package notifications;
 
-import java.util.*;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Slf4j
 public class NotificationManager<T> {
-    private Notifier<T> notifier;
-    private Map<T, Boolean> log = new HashMap<>();
+    private final Notifier<T> notifier;
+    private final Map<T, Boolean> logMap = new HashMap<>();
 
     public NotificationManager(Notifier<T> notifier) {
         this.notifier = notifier;
@@ -15,34 +20,31 @@ public class NotificationManager<T> {
             boolean sent = false;
 
             try {
-                System.out.println("\n>>> Validating message: " + message);
+                log.info("Validating message: {}", message);
                 var method = message.getClass().getMethod("isValid");
                 boolean isValid = (boolean) method.invoke(message);
 
                 if (!isValid) {
-                    System.out.println("⚠️ Invalid message skipped: " + message);
-                    log.put(message, false);
+                    log.warn("Invalid message skipped: {}", message);
+                    logMap.put(message, false);
                     continue;
                 }
 
                 for (int i = 0; i < 3; i++) {
-                    System.out.println("Attempt " + (i + 1) + ": Sending message...");
-                    boolean success = notifier.send(message);
-                    if (success) {
-                        System.out.println("✅ Sent successfully.");
+                    log.info("Attempt {}: Sending message...", i + 1);
+                    if (notifier.send(message)) {
+                        log.info("Message sent successfully on attempt {}", i + 1);
                         sent = true;
                         break;
                     } else {
-                        System.out.println("❌ Failed");
-                        System.out.println("Retrying... (" + (i + 1) + ")");
+                        log.warn("Send attempt {} failed.", i + 1);
                     }
-
                 }
 
-                log.put(message, sent);
+                logMap.put(message, sent);
             } catch (Exception e) {
-                System.out.println("Error validating message: " + e.getMessage());
-                log.put(message, false);
+                log.error("Error validating message: {}", e.getMessage());
+                logMap.put(message, false);
             }
         }
 
@@ -50,12 +52,12 @@ public class NotificationManager<T> {
     }
 
     private void printLog() {
-        long success = log.values().stream().filter(v -> v).count();
-        long failure = log.size() - success;
+        long success = logMap.values().stream().filter(v -> v).count();
+        long failure = logMap.size() - success;
 
-        System.out.println("\n==== Notification Summary ====");
-        System.out.println("Total messages processed: " + log.size());
-        System.out.println("✅ Success: " + success);
-        System.out.println("❌ Failed : " + failure);
+        log.info("\n--- Notification Summary ---");
+        log.info("Total: {}", logMap.size());
+        log.info("Success (sent): {}", success);
+        log.info("Failure (failed): {}", failure);
     }
-    }
+}
