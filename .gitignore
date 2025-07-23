@@ -27,3 +27,18 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Java build outputs
+*.class
+
+# Maven
+target/
+
+# Gradle
+build/
+
+# Lombok delombok (if used)
+delombok/
+
+# Log files
+*.log
