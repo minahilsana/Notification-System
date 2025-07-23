@@ -12,7 +12,8 @@ public class EmailMessage {
     }
 
     public boolean isValid() {
-        return to != null && !to.isBlank() && subject != null && !subject.isBlank();
+        return to != null && to.matches("^[\\w.-]+@[\\w.-]+\\.\\w+$")
+                && subject != null && !subject.isBlank();
     }
 
     @Override

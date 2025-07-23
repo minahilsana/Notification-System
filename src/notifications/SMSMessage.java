@@ -10,7 +10,7 @@ public class SMSMessage {
     }
 
     public boolean isValid() {
-        return phoneNumber != null && phoneNumber.matches("\\d{10}") && text != null && !text.isBlank();
+        return phoneNumber != null && phoneNumber.matches("^\\d{10}$") && text != null && !text.isBlank();
     }
 
     @Override
